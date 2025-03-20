@@ -5,7 +5,7 @@ import 'package:shopx/core/utils/size_config.dart';
 import 'package:shopx/core/theme/app_colors.dart';
 import 'package:shopx/presentation/bloc/Auth/auth_bloc.dart';
 import 'package:shopx/presentation/screens/auth/login_screen.dart';
-import 'package:shopx/presentation/screens/home/home_screen.dart';
+import 'package:shopx/presentation/screens/navigation/custom_navigation.dart';
 import 'package:shopx/presentation/widgets/custom_button.dart';
 import 'package:shopx/presentation/widgets/custom_text.dart';
 import 'package:shopx/presentation/widgets/custom_textfield.dart';
@@ -90,7 +90,9 @@ class SignupScreen extends StatelessWidget {
                   listener: (context, state) {
                     if (state is AuthAuthenticated) {
                       Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (_) => const HomeScreen()),
+                        MaterialPageRoute(
+                          builder: (_) => const ShopXNavigation(),
+                        ),
                       );
                     } else if (state is AuthError) {
                       ScaffoldMessenger.of(

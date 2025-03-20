@@ -1,10 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart' as f;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shopx/core/utils/shared_prefs.dart';
 import 'package:shopx/domain/entities/user.dart';
 
 abstract class AuthRemoteDataSource {
   Future<User> login(String email, String password);
   Future<User> register(String email, String password, String name);
   Future<bool> checkLoginStatus();
+  Future<void> logout();
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -42,5 +45,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<bool> checkLoginStatus() async {
     return firebaseAuth.currentUser != null;
+  }
+
+  @override
+  Future<void> logout() async {
+    await SharedPrefs.setOnboardingShown();
+    return await firebaseAuth.signOut();
   }
 }

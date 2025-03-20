@@ -33,3 +33,5 @@ class RegisterEvent extends AuthEvent {
 }
 
 class CheckLoginStatusEvent extends AuthEvent {}
+
+class LoginOutEvent extends AuthEvent {}

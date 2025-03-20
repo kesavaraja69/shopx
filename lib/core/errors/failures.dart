@@ -12,3 +12,7 @@ abstract class Failure extends Equatable {
 class AuthFailure extends Failure {
   const AuthFailure(super.message);
 }
+
+class ApiFailure extends Failure {
+  const ApiFailure(super.message);
+}

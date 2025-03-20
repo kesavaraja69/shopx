@@ -5,6 +5,8 @@ import 'package:get_it/get_it.dart';
 import 'package:shopx/core/theme/app_theme.dart';
 import 'package:shopx/firebase_options.dart';
 import 'package:shopx/presentation/bloc/Auth/auth_bloc.dart';
+import 'package:shopx/presentation/bloc/Category/category_bloc.dart';
+import 'package:shopx/presentation/bloc/product/product_bloc.dart';
 import 'package:shopx/presentation/screens/splash_screen.dart';
 import 'package:shopx/service_locator.dart';
 
@@ -21,7 +23,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => GetIt.I<AuthBloc>())],
+      providers: [
+        BlocProvider(create: (_) => GetIt.I<AuthBloc>()),
+        BlocProvider(create: (_) => GetIt.I<ProductBloc>()),
+        BlocProvider(create: (_) => GetIt.I<CategoryBloc>()),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Shopx',

@@ -6,5 +6,8 @@ class AppTheme {
     primaryColor: AppColors.primarycolor,
     scaffoldBackgroundColor: AppColors.white,
     brightness: Brightness.light,
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      circularTrackColor: AppColors.primarycolor,
+    ),
   );
 }

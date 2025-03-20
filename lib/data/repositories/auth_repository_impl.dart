@@ -20,6 +20,7 @@ class AuthRepositoryImpl implements AuthRepository {
       final user = await remoteDataSource.login(email, password);
       devtools.log("user- ${user.name.toString()} logged in");
       await sharedPreferences.setBool('isLoggedIn', true);
+      await sharedPreferences.setString('username', user.name.toString());
       return Right(user);
     } on fsauth.FirebaseAuthException catch (e) {
       String message = '';
@@ -45,7 +46,9 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       final user = await remoteDataSource.register(email, password, name);
       devtools.log("user- ${user.name.toString()} Register success");
+
       await sharedPreferences.setBool('isLoggedIn', true);
+      await sharedPreferences.setString('username', user.name.toString());
       return Right(user);
     } on fsauth.FirebaseAuthException catch (e) {
       String message = '';
@@ -67,6 +70,15 @@ class AuthRepositoryImpl implements AuthRepository {
       return Right(isLoggedIn);
     } catch (e) {
       return Left(AuthFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<void> logout() async {
+    try {
+      remoteDataSource.logout();
+    } catch (e) {
+      AuthFailure(e.toString());
     }
   }
 }
