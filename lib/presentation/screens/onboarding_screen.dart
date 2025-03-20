@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopx/core/utils/shared_prefs.dart';
 import 'package:shopx/presentation/screens/auth/login_screen.dart';
 import 'package:shopx/presentation/widgets/custom_button.dart';
 
@@ -60,10 +61,12 @@ class OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Future<void> _completeOnboarding() async {
-    //await SharedPrefs.setOnboardingShown();
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
-    );
+    await SharedPrefs.setOnboardingShown();
+    if (mounted) {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+      );
+    }
   }
 
   @override

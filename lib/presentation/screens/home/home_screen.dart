@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shopx/core/size_config.dart';
+import 'package:shopx/core/utils/size_config.dart';
 import 'package:shopx/presentation/widgets/custom_text.dart';
 
 class HomeScreen extends StatelessWidget {
