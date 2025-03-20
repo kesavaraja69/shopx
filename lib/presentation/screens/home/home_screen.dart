@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return AlertDialog(
           backgroundColor: AppColors.white,
           title: Text(
-            'Logout',
+            ' Logout ',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
           ),
           content: Text(
@@ -48,14 +48,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.of(context).pop();
               },
               child: Text(
-                'Cancel',
+                ' Cancel ',
                 style: TextStyle(fontSize: 18, color: Colors.black87),
               ),
             ),
             TextButton(
               onPressed: onPressed,
               child: Text(
-                'Logout',
+                ' Logout ',
                 style: TextStyle(color: Colors.red, fontSize: 18),
               ),
             ),
