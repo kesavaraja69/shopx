@@ -13,14 +13,27 @@ import 'package:shopx/presentation/widgets/custom_textfield.dart';
 
 import '../../bloc/Auth/auth_bloc.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     Sizecf().init(context);
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
 
     return Scaffold(
       body: SafeArea(
@@ -31,9 +44,21 @@ class LoginScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "SHOPX",
+                    style: TextStyle(
+                      fontSize: Sizecf.blockSizeHorizontal! * 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primarycolor,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 15),
                 Customtext(
                   text: 'Login to your account',
-                  size: Sizecf.blockSizeVertical! * 4,
+                  size: Sizecf.scrnWidth! * 0.12,
                   fontWeight: FontWeight.bold,
                 ),
                 const SizedBox(height: 6),
@@ -107,12 +132,22 @@ class LoginScreen extends StatelessWidget {
                         : CustomElevatedButton(
                           text: 'Sign In',
                           onPressed: () {
-                            context.read<AuthBloc>().add(
-                              LoginEvent(
-                                emailController.text,
-                                passwordController.text,
-                              ),
-                            );
+                            if (emailController.text.isNotEmpty &&
+                                passwordController.text.isNotEmpty) {
+                              context.read<AuthBloc>().add(
+                                LoginEvent(
+                                  emailController.text,
+                                  passwordController.text,
+                                ),
+                              );
+                            } else {
+                              var snackBar = SnackBar(
+                                content: Text('Fill the Value correctly !'),
+                              );
+                              ScaffoldMessenger.of(
+                                context,
+                              ).showSnackBar(snackBar);
+                            }
                           },
                           textColor: Colors.white,
                           borderRadius: 16.0,

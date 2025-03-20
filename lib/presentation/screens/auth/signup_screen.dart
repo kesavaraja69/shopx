@@ -10,15 +10,29 @@ import 'package:shopx/presentation/widgets/custom_button.dart';
 import 'package:shopx/presentation/widgets/custom_text.dart';
 import 'package:shopx/presentation/widgets/custom_textfield.dart';
 
-class SignupScreen extends StatelessWidget {
+class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
+
+  @override
+  State<SignupScreen> createState() => _SignupScreenState();
+}
+
+class _SignupScreenState extends State<SignupScreen> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    nameController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     Sizecf().init(context);
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController nameController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
 
     return Scaffold(
       body: SafeArea(
@@ -29,15 +43,27 @@ class SignupScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "SHOPX",
+                    style: TextStyle(
+                      fontSize: Sizecf.blockSizeHorizontal! * 20,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.primarycolor,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 6),
                 Customtext(
                   text: 'Create your new account',
-                  size: Sizecf.blockSizeVertical! * 4,
+                  size: Sizecf.scrnWidth! * 0.15,
                   fontWeight: FontWeight.bold,
                 ),
                 const SizedBox(height: 6),
                 Customtext(
                   text:
-                      'Create an account to start looking for the food you like ',
+                      'Create an account to start looking for the product you like ',
                   size: Sizecf.blockSizeVertical! * 2,
                   fontWeight: FontWeight.w400,
                   textcolor: AppColors.lightgrey,
@@ -113,13 +139,24 @@ class SignupScreen extends StatelessWidget {
                         : CustomElevatedButton(
                           text: 'Register',
                           onPressed: () {
-                            context.read<AuthBloc>().add(
-                              RegisterEvent(
-                                email: emailController.text,
-                                password: passwordController.text,
-                                name: nameController.text,
-                              ),
-                            );
+                            if (emailController.text.isNotEmpty &&
+                                passwordController.text.isNotEmpty &&
+                                nameController.text.isNotEmpty) {
+                              context.read<AuthBloc>().add(
+                                RegisterEvent(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                  name: nameController.text,
+                                ),
+                              );
+                            } else {
+                              var snackBar = SnackBar(
+                                content: Text('Fill the Value correctly !'),
+                              );
+                              ScaffoldMessenger.of(
+                                context,
+                              ).showSnackBar(snackBar);
+                            }
                           },
                           textColor: Colors.white,
                           borderRadius: 16.0,

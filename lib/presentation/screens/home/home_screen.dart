@@ -32,19 +32,32 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: AppColors.white,
-          title: Text('Logout'),
-          content: Text('Are you sure you want to log out?'),
+          title: Text(
+            'Logout',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+          ),
+          content: Text(
+            'Are you sure you want to \n log out?',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 17.6),
+          ),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 // Close the dialog
                 Navigator.of(context).pop();
               },
-              child: Text('Cancel', style: TextStyle(color: Colors.black87)),
+              child: Text(
+                'Cancel',
+                style: TextStyle(fontSize: 18, color: Colors.black87),
+              ),
             ),
             TextButton(
               onPressed: onPressed,
-              child: Text('Logout', style: TextStyle(color: Colors.red)),
+              child: Text(
+                'Logout',
+                style: TextStyle(color: Colors.red, fontSize: 18),
+              ),
             ),
           ],
         );
@@ -169,6 +182,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         child: Text(
                                           categories,
                                           style: TextStyle(
+                                            fontWeight: FontWeight.w600,
                                             color:
                                                 categoriesf
                                                     ? AppColors.white
@@ -199,7 +213,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: Sizecf.scrnHeight! * 0.62,
+                  height: Sizecf.scrnHeight! * 0.66,
                   child: BlocBuilder<ProductBloc, ProductState>(
                     builder: (context, state) {
                       if (state is ProductLoading) {
@@ -219,8 +233,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
-                                  crossAxisSpacing: 8,
-                                  mainAxisSpacing: 8,
+                                  crossAxisSpacing: 9,
+                                  mainAxisSpacing: 9,
                                   childAspectRatio: 0.7,
                                 ),
                             itemCount: state.products.length,
@@ -232,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               return Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
-                                  height: Sizecf.scrnHeight! * 0.29,
+                                  height: Sizecf.scrnHeight! * 0.27,
                                   width: Sizecf.scrnWidth! * 0.4,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
@@ -252,7 +266,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.symmetric(
-                                              vertical: 12,
+                                              vertical: 17,
                                             ),
                                             child: ClipRRect(
                                               borderRadius:
@@ -317,7 +331,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                             ),
 
-                                            SizedBox(height: 7),
+                                            SizedBox(height: 5),
                                             Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
@@ -333,7 +347,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         3.7,
                                                     fontWeight: FontWeight.bold,
                                                     overflow: TextOverflow.clip,
-                                                    color: Colors.orange,
+                                                    color: const Color.fromARGB(
+                                                      255,
+                                                      251,
+                                                      142,
+                                                      0,
+                                                    ),
                                                   ),
                                                 ),
                                                 Text(
@@ -343,10 +362,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     fontSize:
                                                         Sizecf
                                                             .blockSizeHorizontal! *
-                                                        3.1,
+                                                        3.5,
                                                     fontWeight: FontWeight.bold,
                                                     overflow: TextOverflow.clip,
-                                                    color: Colors.orange,
+                                                    color:
+                                                        AppColors.primarycolor,
                                                   ),
                                                 ),
                                               ],
